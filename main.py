@@ -160,4 +160,6 @@ def str_to_list(text):
     return literal_eval(text)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    # Host DEVE ser 0.0.0.0 para aceitar conexões externas
+    app.run(host="0.0.0.0", port=port)
