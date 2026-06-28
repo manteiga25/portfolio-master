@@ -5,6 +5,7 @@ from Assistant.model import model
 from Database.DB import Messages, connector
 from ast import literal_eval
 from os import environ
+import os
 from static.data import data
 from dotenv import load_dotenv
 from email_service import Email
