@@ -1,5 +1,6 @@
-from numpy import argmax
-from sentence_transformers import SentenceTransformer, util
+from numpy import argmax, array
+from sklearn.metrics.pairwise import cosine_similarity
+from fastembed import TextEmbedding
 
 class model:
 
@@ -9,22 +10,23 @@ class model:
 
         self.response_base = response
 
-        self.model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+        self.model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
 
-        self.knowledge_embedding = self.model.encode(base, convert_to_numpy=True, normalize_embeddings=True)
+        self.knowledge_embedding = array(list(self.model.embed(base)))
 
     def answer_question(self, user_question):
         try:
-            question_embedding = self.model.encode(user_question, convert_to_numpy=True, normalize_embeddings=True)
+            question_embedding = list(self.model.embed(user_question))
 
-            similarities = util.cos_sim(question_embedding, self.knowledge_embedding)[0]
+            similarities = cosine_similarity(question_embedding, self.knowledge_embedding)[0]
 
             max_index = argmax(similarities)
 
-            if similarities[max_index] < 0.5:
+            if similarities[max_index] < 0.6:
                 raise Exception("No similarity")
             most_similar_text = self.response_base[max_index]
 
             return most_similar_text
         except Exception as e:
+            print(e)
             return None
