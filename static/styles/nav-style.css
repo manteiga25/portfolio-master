@@ -1,0 +1,115 @@
+/* Navigation */
+        nav {
+            background: transparent;
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            font-size: 1.3rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+  position: relative;      /* pra posicionar o ::after em relação ao link */
+  color: #e0e0e0;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+}
+
+/* 2) Definição do pseudo-elemento da barra */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 3px;             /* espessura da barra */
+  background-color: #00d4ff;
+  transition: width 0.3s ease;
+  border-radius: 2px 2px 0 0; /* opcional: cantos arredondados em cima */
+}
+
+        .nav-menu a:hover {
+            color: #00d4ff;
+            transform: translateY(-2px);
+        }
+
+        .nav_menu li {
+            padding: 15px 0;
+            text-transform: uppercase;
+            transform: translateY(200px);
+            opacity: 0;
+            animation: 2s slideUp ease forwards .5s;
+            position: relative;
+        }
+
+        .language-select {
+            font-size: 1.3rem;
+            background: transparent;
+            color: #fff;
+            border-radius: 12px;
+            border-color: #00d4ff;
+            padding: 5px;
+        }
+
+        .language-select .option-item {
+            background: #111;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+        @media (max-width: 568px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(35, 15, 60, 0.8); /* Fundo semi-transparente */
+                backdrop-filter: blur(15px); /* Efeito de desfoque */
+                -webkit-backdrop-filter: blur(15px);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                padding: 1rem 0;
+            }
+
+            .nav-menu .li, .language-select {
+                margin-left: 10px;
+            }
+
+            .nav-menu a:hover {
+            background: none;
+
+                color: #00d4ff;
+                transform: translateY(-2px);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }

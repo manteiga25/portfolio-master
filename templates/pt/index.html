@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandre - Desenvolvedor Full</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/cv-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/skill-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/experience-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/project-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/education-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/form-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/fotter-style.css') }}">
+
+</head>
+<body>
+
+    <div class="particles" id="particles">
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
+    </div>
+
+    {% if not user_consented %}
+    <div id="cookie-consent-banner">
+        Este site usa cookies para melhorar a sua experiência. Ao continuar, você concorda com o uso de cookies.
+        <button onclick="setCookie(true)">Aceitar</button>
+        <button onclick="setCookie(false)">Recusar</button>
+        </div>
+    {% endif %}
+
+    <nav>
+        <div class="container">
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#education">Educação</a></li>
+                <li><a href="#contact">Contacto</a></li>
+               <li><select class="language-select" name="language" id="languages" onchange="changeLanguage(this.value)">
+                    <option class="option-item" value="pt"><a href="/language/pt">Português</a></option>
+                   <option class="option-item" value="en"><a href="/language/en">English</a></option>
+                </select></li>
+            </ul>
+        </div>
+    </nav>
+    <header>
+
+        <button id="chat-toggle" class="floating-chat-button" onclick="toggleChat()">
+</button>
+
+<!-- Janela do Chat -->
+<div id="chat-window" class="chat-window">
+  <div class="chat-header">
+    <span>Chat</span>
+    <button id="close-chat" class="close-button" onclick="closeChatWindow()">&times;</button>
+  </div>
+  <div id="chat-messages" class="chat-messages">
+    <!-- Mensagens aparecerão aqui -->
+    <div class="message received">
+      <p>Olá! Como posso ajudar?</p>
+      <span class="timestamp">Agora</span>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Digite sua mensagem..." />
+      <button id="microphone-btn" class="send-button" onclick="capture_audio('pt-PT')">Falar</button>
+    <button id="send-message" class="send-button" onclick="sendMessage()">Enviar</button>
+  </div>
+</div>
+
+    <div class="container">
+        <div class="hero-flex">
+            <div class="hero-content">
+                    <h1 class="hero-title-noncolor">Olá, eu sou o <span class="hero-title">Alexandre</span></h1>
+                <p class="hero-subtitle typewriter" id="typewriter"></p>
+                <p class="hero-description">
+                    Gosto de criar soluções para IA, desenvolvimento WEB, Desktop e mobile.
+                    Experiente em Java, Python, C# a bancos de dados SQL, construi vários sistemas e soluções que resolvem problemas,
+                    desde IDEs e assistentes de IA.
+                    Gosto imenso de desenvolver software e fazer a diferença.
+                </p>
+                <div style="padding-top: 20px;">
+                    <a href="https://www.linkedin.com/in/alexandre-mykailo-aa4998344" class="button-link" target="_blank">Linkedin</a>
+                    <a style="margin-left: 10px;" class="button-link" target="_blank" href="https://github.com/manteiga25">Github</a>
+                </div>
+            </div>
+            
+            <div id="BotMainDiv"></div>
+        </div>
+        
+        <div class="code-bg"></div>
+    </div>
+</header>
+
+<section id="cv" class="cv-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Sobre mim</h2>
+            <div class="cv-container">
+                <div id="BotDiv">
+                <div class="cv-text">
+                    <p>Sou uma pessoa dedicada, gosto de tecnologia, sempre
+em busca de aprender e crescer tanto profissional
+quanto pessoalmente. Gosto de programar, estudar
+novas linguagens e explorar soluções criativas para
+resolver problemas.</p>
+                    <p style="margin-top: 1.5rem;">Nos meus tempos livres, gosto de
+ouvir música, sair de casa para descontrair, ir ao ginásio,
+e aproveitar bons momentos com amigos e família. No
+ambiente de trabalho, sou empenhado, responsável e
+procuro sempre dar o meu melhor em tudo o que faço.</p>
+                    <p style="margin-top: 1.5rem;">Adoro trabalhar em equipa e ajudar todos. Acredito
+que o esforço constante e a vontade de evoluir são as
+chaves para o sucesso.</p>
+                </div>
+
+                </div>
+                
+                <div class="cv-preview">
+                    <div class="cv-frame-container">
+                        <iframe id="cv-frame" loading="lazy" src="https://www.canva.com/design/DAGbWBOJMZ0/c4r3R2jGd81TQNJlnZr2qA/view?embed"></iframe>
+                    </div>
+
+                    <div class="cv-actions">
+                        <a href="https://drive.google.com/file/d/11WPahmH52VviT71slg-skLQDMjWvJ6bf/view?usp=sharing" target="_blank" class="cv-btn">
+                            <i class="fas fa-download"></i> Baixar CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Competencias técnicas</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll glass">
+                    <h3>Linguagens de programação</h3>
+                    <ul class="skill-list">
+                        <li>Java (Linguagem que domino) - JavaFX, Spring Framework, Android Development</li>
+                        <li>Python - AI/ML, tensorflow, Flask, FastAPI, customTkinter, Sistemas embarcados</li>
+                        <li>C# - Windows Forms, Aplicações Desktop</li>
+                        <li>C/C++ - Programação baixo nível, Desempenho</li>
+                        <li>SQL - ‘Design’ & manutenção de bancos de dados</li>
+                    </ul>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>Web Technologies</h3>
+                    <ul class="skill-list">
+                        <li>HTML5 & CSS3 - Desenvolvimento WEB moderno</li>
+                        <li>JavaScript - Front-End interactivo</li>
+                        <li>Flask Framework - Aplicações WEB com flask</li>
+                        <li>Spring Boot - Aplicações Java WEB</li>
+                        <li>REST API - Integração</li>
+                        <li>Desenvolvedor Full Stack</li>
+                    </ul>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>Bancos de dados & Sistemas</h3>
+                    <ul class="skill-list">
+                        <li>MySQL - Soluções de bancos de dados</li>
+                        <li>SQLite - Banco de dados embarcado</li>
+                        <li>PostgreSQL - SQL avançado</li>
+                        <li>Gerenciar sistemas Linux</li>
+                        <li>Integração com AI e machine learning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Projetos</h2>
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">SQLIDE</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaFX</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">AI Assistant</span>
+                    </div>
+                    <p class="project-description">IDE avançada para gerenciar bancos de dados SQL com editor de código, ferramentas de visualização de dados e com um assistente de IA integrado. Suporta varios tipos de sistemas de bancos (MySQL, SQLite e PostgreSQL).</p>
+                    <a href="https://github.com/manteiga25/sqlide_project" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">Restaurant Assistant Bot</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Telegram API</span>
+                        <span class="tech-tag">AI/NLP</span>
+                    </div>
+                    <p class="project-description">Bot de Telegram inteligente para falar com clientes e gerenciar marcações/reservas acessando o banco de dados.</p>
+                    <a href="https://github.com/manteiga25/RestaurantAssistant" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">Translator Website</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Google API</span>
+                    </div>
+                    <p class="project-description">Aplicação WEB Full-stack de tradução de frases para outros idiomas usando a API google-translator, com sistema de login e banco de dados, rápido e responsivo.</p>
+                    <a href="https://github.com/manteiga25/translator_app" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">Kernel Manager</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">customTkinter</span>
+                        <span class="tech-tag">Linux</span>
+                        <span class="tech-tag">System Admin</span>
+                    </div>
+                    <p class="project-description">Gerenciador de Kernel Linux avançado, personaliza as configurações do kernel como escalonador, I/O, CPU, Rede, otimizações de sistema, etc...</p>
+                    <a href="https://github.com/manteiga25/kernel-manager" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">Personality Test System</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Psychology</span>
+                        <span class="tech-tag">Data Analysis</span>
+                    </div>
+                    <p class="project-description">Teste de personalidade baseado no eneagrama das 9 personalidades, o utilizador responde as perguntas e descobre o seu tipo de personalidade. Contem banco de dados, envio de e-mail e 2 idiomas.</p>
+                    <a href="https://github.com/manteiga25/Teste-de-personalidade" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">SoftVoice stock scanner</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Android</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Excel</span>
+                    </div>
+                    <p class="project-description">Aplicação interna para P.D.A e Android para ler código QR dos produtos, gerenciar o banco de dados e exportar para Excel.</p>
+                    <a href="https://github.com/manteiga25/Softvoice_scanner" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">Restaurant Ingredients Manager</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Windows Forms</span>
+                        <span class="tech-tag">Database</span>
+                        <span class="tech-tag">Inventory</span>
+                    </div>
+                    <p class="project-description">Pequena interface de receitas de restaurante feito com C# (Windows forms).</p>
+                    <a href="https://github.com/manteiga25/Gerenciador-de-receitas" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <h3 class="project-title">Portfólio</h3>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Embedding text</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                    <p class="project-description">O meu portfólio desenvolvido com html css, js e python com flask no back-end e sistema de IA que responde perguntas sobre mim.</p>
+                    <a href="https://github.com/manteiga25/portfolio" target="_blank" class="github-link">
+                        <svg class="github-icon" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Professional Experience</h2>
+            <div class="experience-card hero-flex animate-on-scroll">
+                <div>
+                <h3 class="experience-title">Técnico e Programador (27-05-2024 to 01-11-2024)</h3>
+                <p class="experience-company">Softvoice - Portugal</p>
+                <p class="experience-description">
+                    Experiência abrangente em estágio trabalhando com operações de TI em nível empresarial. Responsável pela manutenção e monitoramento de servidores, gerenciamento de sistemas de Ponto de Venda (P.O.S), reparação e solução de problemas em eletrônicos, suporte ao cliente e assistência técnica, e sistemas de gestão de estoque.
+                    <br><br>
+                    Desenvolvi um aplicativo Android completo para leitura e gerenciamento de códigos QR, integrado com sistemas de banco de dados para armazenamento e recuperação de dados, implementei funcionalidade de exportação para Excel para relatórios e criei um sistema automatizado de formulários por e-mail para comunicação com clientes e envio de dados.
+                </p>
+                <div class="experience-skills">
+                    <span class="experience-skill">Server Maintenance</span>
+                    <span class="experience-skill">P.O.S Systems</span>
+                    <span class="experience-skill">Electronics Repair</span>
+                    <span class="experience-skill">Customer Support</span>
+                    <span class="experience-skill">Stock Management</span>
+                    <span class="experience-skill">Android Development</span>
+                    <span class="experience-skill">QR Code Integration</span>
+                    <span class="experience-skill">Database Management</span>
+                    <span class="experience-skill">Excel Export</span>
+                    <span class="experience-skill">Email Automation</span>
+                </div>
+            </div>
+            <a href="https://www.softvoice.pt/about" target="_blank">
+                <img class="image-skill" src="https://tse3.mm.bing.net/th/id/OIP.9NF5I7z00lS1-VqQXUmntQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Site da empresa de estágio">
+            </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="education">
+    <div class="container">
+        <h2 class="section-title animate-on-scroll">Education</h2>
+        <div class="education-grid"> <!-- New wrapper div -->
+            <div class="education-card animate-on-scroll">
+                <h3 class="education-title">Técnico de Informática - Sistemas</h3>
+                <p class="education-school">Escola Básica e Secundária de Alvide</p>
+                <p class="education-type">Técnico de informática - Sistemas</p>
+                <div class="collapse-widget">
+                    <button type="button" class="collapse-btn" id="rating-btn" data-target="books-content">
+                        Notas
+                        <i class="fas fa-chevron-down collapse-icon"></i>
+                    </button>
+                    <div class="collapse-content" id="books-content">
+                        <div class="books-list">
+                            <div class="item">
+                                <p class="item-title">Programação C/C++, Python, Java: 20-20</p>
+                            </div>
+                            <div class="item">
+                                <p class="item-title">Sistemas de informação: 19–20</p>
+                            </div>
+                            <div class="item">
+                                <p class="item-title">Redes de comunicação: 18–20</p>
+                            </div>
+                            <div class="item">
+                                <p class="item-title">Aplicações Informáticas: 17–20</p>
+                            </div>
+                            <div class="item">
+                                <p class="item-title">Tecnologias da informação e comunicação: 17-20</p>
+                            </div>
+                            <div class="item">
+                                <p class="item-title">Final project (SQLIDE): 18-20</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="education-card animate-on-scroll"> <!-- Added animate-on-scroll class for consistency -->
+                <h3 class="education-title">Cascais OP Jovem</h3>
+                <p class="education-school">Escola Básica e Secundária de Alvide</p>
+                <p class="education-type">Presented proposals during school sessions and contributed to vote-based selection for funding allocation.</p>
+            </div>
+
+        </div> <!-- Close .education-grid -->
+
+<!-- Collapse widget for books -->
+                <div class="collapse-widget">
+                    <button type="button" class="collapse-btn-courses" id="courses-btn" data-book-target="courses-content">
+                        Mais formações
+                        <i class="fas fa-chevron-down collapse-icon"></i>
+                    </button>
+                    <div class="collapse-content" id="courses-content">
+                        <div class="books-list">
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Arquitetura de Computadores</h4>
+                                    <p class="book-author">De José Delgado & Carlos Ribeiro</p>
+                                    <p class="book-description">Um manual sobre arquitetura de computadores. Como o processador e a memória funcionam. Programação em assembly e como a CPU interpreta as instruções.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://www.fca.pt/fotos/produtos/d_9789727227891_arquitetura_de_computadores_5_ed.at._.jpg">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Sistemas Operativos</h4>
+                                    <p class="book-author">De José Alves, Paulo Ferreira, Carlos Ribeiro, Luís Veiga e Rodrigo Rodrigues</p>
+                                    <p class="book-description">Como funcionam os sistemas operativos, desde o nível do kernel (drivers, memória, segurança, etc.) até ao espaço do utilizador e serviços do sistema operativo.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://www.fca.pt/fotos/produtos/d_9789727227563_sistemas_operativos-2_ed._at..jpg">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Android Profissional</h4>
+                                    <p class="book-author">De Ricardo Queirós</p>
+                                    <p class="book-description">Desenvolva aplicações modernas para Android com Java, usando o Android Studio e explorando a funcionalidade do sistema Android.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://www.fca.pt/fotos/produtos/9789727228744_android_profissional_16859282355a8c40642fc38.jpg">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Linguagens WEB</h4>
+                                    <p class="book-author">De Alexandre Pereira & Carlos Poupa</p>
+                                    <p class="book-description">Desenvolva websites com HTML, CSS e JavaScript, além de programação back-end com VB.NET, C#, PHP, Java, AJAX, MySQL e programação Android.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://th.bing.com/th/id/OIP.8t-z9xl99wGnRYo8YX1o8gAAAA?w=203&h=287&c=7&r=0&o=7&pid=1.7&rm=3">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Linguagem C</h4>
+                                    <p class="book-author">De Luís Damas</p>
+                                    <p class="book-description">Introdução à programação com a linguagem C, gestão de memória, manipulação de ponteiros, operações com strings e otimizações de algoritmos.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://www.fca.pt/fotos/produtos/9789727221561_linguagem_c_24ed_172132580562028602749cd.jpg">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>C++</h4>
+                                    <p class="book-author">De Henrique Loureiro</p>
+                                    <p class="book-description">Livro de C++ que descreve a programação com C++ e POO, como trabalhar com MySQL e XML em C++. Fundamentos de front-end com GTK, com suporte para Linux e Windows.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://www.fca.pt/fotos/produtos/9789727229048_c__guia_de_programacao_capa_200_kb_11976702375d945deaf1580.jpg">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Python e Exploração de Dados</h4>
+                                    <p class="book-author">De Jorge Caiado</p>
+                                    <p class="book-description">Introdução à ciência de dados e aprendizagem automática com Python, utilizando Pandas, Numpy, TensorFlow, Sklearn, Matplotlib, Anaconda e Jupyter Notebook.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://static.fnac-static.com/multimedia/Images/PT/NR/a6/72/99/10056358/1540-1.jpg">
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <div class="text-book">
+                                    <h4>Bases de Dados</h4>
+                                    <p class="book-author">De Feliz Gouveia</p>
+                                    <p class="book-description">Introdução as bases de dados e suas implementações usando vários SGBD como PostgreSQL, OracleSQL e MySQL.</p>
+                                </div>
+                                <div class="book">
+                                    <img src="https://static.fnac-static.com/multimedia/Images/PT/NR/0c/a5/67/6792460/1540-1.jpg">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+    </div>
+</section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content animate-on-scroll">
+                <h2 class="contact-title">Vamos trabalhar juntos</h2>
+                <p class="contact-text">
+                    Estou sempre interessado em discutir novas oportunidades, projetos inovadores e colaborar com outros desenvolvedores. Se você precisa de uma solução full-stack, arquitetura de banco de dados, integração de IA ou desenvolvimento de sistemas, adoraria ouvir sobre seu projeto e ver como podemos trabalhar juntos para transformar suas ideias em realidade.
+                </p>
+                <form class="contact-form animate-on-scroll" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Primeiro Nome</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Ultimo Nome</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Endereço de Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Assunto</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" placeholder="Conte me como podemos trabalhar juntos...." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Enviar mensagem</button>
+            </form>
+                 <div id="status" class="status"></div>
+            </div>
+        </div>
+    </section>
+
+<footer>
+    <div class="container">
+        <div class="footer-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p><i class="fas fa-envelope"></i> alexandremykhailo@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +351 969604493</p>
+                <p><i class="fas fa-map-marker-alt"></i> Cascais, Portugal</p>
+            </div>
+            
+            <div class="social-center">
+                <div class="social-links">
+                    <a href="https://github.com/manteiga25"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/alexandre-mykailo-aa4998344"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p class="copyright">&copy; 2025 Alexandre. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.37/build/spline-viewer.js"></script>
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/scroll.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='script/chat.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='script/education.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='script/contact.js') }}" defer></script>
+
+    <script>
+    if (!{{ user_consented | tojson }}) {
+        document.getElementById('cookie-consent-banner').style.display = 'block';
+    }
+    </script>
+
+<script>
+
+    set_text(false);
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    let botLoaded = false;
+
+async function loadBot(id, className, url) {
+    const botDiv = document.getElementById(id);
+    botDiv.classList.add(className);
+    botDiv.innerHTML += url;
+}
+
+async function resizeCheckHandler() {
+    if (!botLoaded && window.innerHeight >= 480 && window.innerWidth >= 640) {
+        botLoaded = true;
+        await loadBot('BotMainDiv', 'model', "<spline-viewer\n" +
+            "                    loading-anim-type=\"spinner-small-dark\" \n" +
+            "                    url=\"https://prod.spline.design/wJHo2FS0BwCJhvoe/scene.splinecode\"\n" +
+            "                    style=\"height: 100%; width: 100%; \"\n" +
+            "                ></spline-viewer>");
+        await loadBot('BotDiv', 'cv-text-and-bot', "<spline-viewer class=\"bot\" loading-anim-type=\"spinner-small-dark\" url=\"https://prod.spline.design/vky3yaT6WalpMuc2/scene.splinecode\"></spline-viewer>");
+    }
+}
+
+resizeCheckHandler();
+window.addEventListener('resize', resizeCheckHandler);
+
+   const serverMessages = {{ messages|tojson }};
+
+   const responseElement = document.createElement('div');
+          responseElement.classList.add('message', 'received');
+
+
+    if (Array.isArray(serverMessages) && serverMessages.length > 0) {
+        serverMessages.forEach(function(msg) {
+        if (msg.type) {
+            compute_user_message(msg.content, new Date()); // Diferentes timestamps
+            } else {
+            compute_assistant_message(msg.content, new Date()); // Diferentes timestamps
+            }
+        });
+    }
+});
+</script>
+
+</body>
+</html>
